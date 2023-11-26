@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Slithering Slinky</title>
+  <style>
+    canvas {
+      border: 1px solid #000;
+      display: block;
+      margin: auto;
+    }
+  </style>
+</head>
+<body>
+  <canvas id="myCanvas" width="400" height="400"></canvas>
+
+  <script>
+    const canvas = document.getElementById('myCanvas');
+    const context = canvas.getContext('2d');
+
+    // Parameters
+    const slinkyRadius = 20;
+    const numberOfCoils = 6;
+    const coilSpacing = 40;
+    const amplitude = 90;
+    let time = 0;
+
+    function draw() {
+      // Clear the canvas
+      context.clearRect(0, 0, canvas.width, canvas.height);
+
+      // Draw the slithering slinky
+      const centerX = 111;
+      const centerY = 111;
+
+      for (let i = 0; i < numberOfCoils; i++) {
+        const slinkyX = centerX + i * coilSpacing + amplitude * Math.cos(time + i * 0.2);
+        const slinkyY = centerY + amplitude * Math.sin(time + i * 0.2);
+
+        context.beginPath();
+        context.arc(slinkyX, slinkyY, slinkyRadius, 0, 2 * Math.PI);
+        context.fillStyle = 'red'; // Change color as needed
+        context.fill();
+        context.stroke();
+      }
+
+      // Update time for the next frame
+      time += 0.05;
+
+      // Request the next frame
+      requestAnimationFrame(draw);
+    }
+
+    // Start the animation
+    draw();
+  </script>
+</body>
+</html>
